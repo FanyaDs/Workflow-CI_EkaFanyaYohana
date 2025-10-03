@@ -68,3 +68,10 @@ if has_valid_test_labels:
     print(classification_report(df_test["sentiment"], y_te))
 else:
     print("\nℹ️ Test labels are masked/unavailable. Skipping test evaluation.")
+
+# === Save validation report for CI artifact ===
+from sklearn.metrics import classification_report
+with open("validation_report.txt", "w") as f:
+    f.write(f"Validation Accuracy: {val_acc:.4f}\n\n")
+    f.write(classification_report(df_valid["sentiment"], y_val))
+print("✅ Saved validation_report.txt")

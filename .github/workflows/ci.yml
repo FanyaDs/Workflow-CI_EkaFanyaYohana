@@ -23,6 +23,16 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Sanity check paths
+        run: |
+          python - << 'PY'
+          import os, pathlib
+          print("CWD:", os.getcwd())
+          print("Top level:", os.listdir("."))
+          print("MLProject:", os.listdir("MLProject"))
+          print("Dataset:", os.listdir("MLProject/namadataset_preprocessing"))
+          PY
+
       - name: Run training script
         run: |
           python MLProject/modelling.py
